@@ -34,9 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/ugyfel/{ugyfel}', [UgyfelController::class, 'destroy'])->name('ugyfel.destroy');
     Route::get('/ugyfel/{ugyfel}/edit', [UgyfelController::class, 'edit'])->name('ugyfel.edit');
 
+    Route::get('/ugyfel', [UgyfelController::class, 'index'])->name('ugyfel.index');
+    Route::get('/ugyfel/{id}', [UgyfelController::class, 'show'])->name('ugyfel.show');
 });
 
-require __DIR__.'/auth.php';
-
-Route::get('/ugyfel', [UgyfelController::class, 'index'])->name('ugyfel.index');
-Route::get('/ugyfel/{id}', [UgyfelController::class, 'show'])->name('ugyfel.show');
+require __DIR__ . '/auth.php';
