@@ -19,10 +19,19 @@ class UgyfelController extends Controller
     {
         $sort_by = request()->query('sort_by', 'UgyfelID');
         $sort_dir = request()->query('sort_dir', 'asc');
-        $ugyfel = Ugyfel::orderBy($sort_by, $sort_dir)->paginate(10);
+        $keyword = request()->input('search');
+
+        $query = Ugyfel::orderBy($sort_by, $sort_dir);
+
+        if ($keyword) {
+            $query->search($keyword);
+        }
+
+        $ugyfel = $query->paginate(10);
 
         return view('ugyfel.index', compact('ugyfel'));
     }
+
 
 
 
@@ -47,6 +56,8 @@ class UgyfelController extends Controller
     {
 
         $request->validate([
+            'nev' => ['required', 'regex:/^[\p{L} -]+$/u', 'min:3'],
+            'email' => ['required', 'regex:/^\S+@\S+\.\S+$/', 'min:3'],
             'objcim' => ['required', 'min:3'],
             'telefon' => ['required', 'regex:/^(\+36|06)?[0-9]{9}$/'],
             'szamnev' => ['required', 'regex:/^[A-Za-záéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]{3,}$/'],
@@ -59,11 +70,12 @@ class UgyfelController extends Controller
             'munka' => 'required',
             'felhasznalt_anyagok' => ['required', 'string', 'min:3'],
         ], [
-            'class_subjects.required' => 'A class subjects mező megadása kötelező.',
-            'class_subjects.regex' => 'A class subjects mező érvénytelen formátumú.',
             'nev.required' => 'A név megadása kötelező.',
             'nev.regex' => 'A név csak betűket és szóközöket tartalmazhat, magyar betűket is elfogadva.',
             'nev.min' => 'A név legalább 3 karakter hosszú legyen.',
+            'email.required' => 'Az email megadása kötelező.',
+            'email.regex' => 'Érvénytelen email cím.',
+            'email.min' => 'A email legalább 3 karakter hosszú legyen.',
             'objcim.required' => 'Az objektum címének megadása kötelező.',
             'objcim.regex' => 'Az objektum címe érvénytelen karaktereket tartalmaz.',
             'objcim.min' => 'Az objektum címének legalább 3 karakter hosszúnak kell lennie.',
@@ -88,7 +100,9 @@ class UgyfelController extends Controller
 
 
         $ugyfel = new Ugyfel();
+        $ugyfel->UgyfelID = $request->id;
         $ugyfel->Nev = $request->nev;
+        $ugyfel->Email = $request->email;
         $ugyfel->ObjCim = $request->objcim;
         $ugyfel->Telefon = $request->telefon;
         $ugyfel->SzamNev = $request->szamnev;
@@ -140,7 +154,10 @@ class UgyfelController extends Controller
     {
 
         $ugyfel = Ugyfel::find($id);
+
+        $ugyfel->UgyfelID = $request->id;
         $ugyfel->Nev = $request->nev;
+        $ugyfel->Email = $request->email;
         $ugyfel->ObjCim = $request->objcim;
         $ugyfel->Telefon = $request->telefon;
         $ugyfel->SzamNev = $request->szamnev;
@@ -172,5 +189,15 @@ class UgyfelController extends Controller
         $ugyfel = Ugyfel::find($id);
         $ugyfel->delete();
         return redirect()->route('ugyfel.index')->with('success', 'Ügyfél sikeresen törölve');
+    }
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $ugyfel = Ugyfel::where('Nev', 'like', "%$keyword%")
+            ->orWhere('UgyfelID', $keyword)
+            ->get();
+
+        return view('ugyfel.index', compact('ugyfel'));
     }
 }

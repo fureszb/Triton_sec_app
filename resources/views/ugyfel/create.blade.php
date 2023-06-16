@@ -6,6 +6,10 @@
     <div class="alert alert-warning">{{ $message }}</div>
 @enderror
 
+@error('email')
+    <div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
 @error('objcim')
     <div class="alert alert-warning">{{ $message }}</div>
 @enderror
@@ -46,11 +50,19 @@
     <div class="alert alert-warning">{{ $message }}</div>
 @enderror
 
-<form action="{{ route('ugyfel.store') }}" method="POST">
+<form id="createForm" action="{{ route('ugyfel.store') }}" method="POST" >
     @csrf
+    <fieldset>
+       <label for="id">ID</label>
+        <input type="text" name="id" id="id">
+    </fieldset>
     <fieldset>
         <label for="nev">Név</label>
         <input type="text" name="nev" id="nev">
+    </fieldset>
+    <fieldset>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
     </fieldset>
     <fieldset>
         <label for="objcim">Objektum címe</label>
@@ -108,6 +120,7 @@
         <label for="felhasznalt_anyagok">Felhasznált anyagok</label>
         <textarea name="felhasznalt_anyagok" id="felhasznalt_anyagok"></textarea>
     </fieldset>
-    <button type="submit">Mentés</button>
+    <button id="saveButton">Mentés gomb</button>
+
 </form>
 @endsection

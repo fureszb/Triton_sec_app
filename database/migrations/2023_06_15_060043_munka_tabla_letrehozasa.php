@@ -17,13 +17,14 @@ return new class extends Migration
             $table->unsignedBigInteger('SzolgID');
             $table->unsignedBigInteger('MunkaID');
             $table->string('Nev');
+            $table->string('Email');
             $table->string('ObjCim');
             $table->string('Telefon');
             $table->string('SzamNev');
             $table->string('SzamCim');
             $table->datetime('KezdDatum');
             $table->datetime('BefDatum');
-            $table->string('AdoSzam')->default('null');
+            $table->string('AdoSzam')->nullable()->default(null);
             $table->text('FelhasznaltAnyagok');
             $table->timestamps();
 

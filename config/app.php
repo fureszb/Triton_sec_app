@@ -2,9 +2,20 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Barryvdh\DomPDF\ServiceProvider as DomPDFServiceProvider;
+use Barryvdh\DomPDF\Facade as PDF;
 
 return [
 
+    'providers' => [
+
+        Barryvdh\DomPDF\ServiceProvider::class,
+    ],
+
+    'aliases' => [
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Name

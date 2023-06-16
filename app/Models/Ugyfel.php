@@ -25,4 +25,11 @@ class Ugyfel extends Model
     {
         return $this->belongsTo(Munka::class, 'MunkaID')->select(['MunkaID', 'Jelleg', 'Leiras']);
     }
+    public function scopeSearch($query, $keyword)
+{
+    return $query->where(function ($query) use ($keyword) {
+        $query->where('nev', 'LIKE', '%' . $keyword . '%')
+              ->orWhere('UgyfelID', $keyword);
+    });
+}
 }

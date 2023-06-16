@@ -11,6 +11,7 @@
             <ul class="list-group">
                 <li class="list-group-item"><strong>UgyfelID:</strong> {{ $ugyfel->UgyfelID }}</li>
                 <li class="list-group-item"><strong>Név:</strong> {{ $ugyfel->Nev }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ $ugyfel->Email }}</li>
                 <li class="list-group-item"><strong>Objektum címe:</strong> {{ $ugyfel->ObjCim }}</li>
                 <li class="list-group-item"><strong>Telefonszám:</strong> {{ $ugyfel->Telefon }}</li>
                 <li class="list-group-item"><strong>Számlázási név:</strong> {{ $ugyfel->SzamNev }}</li>

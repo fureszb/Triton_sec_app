@@ -9,9 +9,21 @@
 <form action="{{ route('ugyfel.update', $ugyfel->UgyfelID) }}" method="POST">
     @csrf
     @method('PUT')
+
+    <fieldset>
+        <label for="id">ID</label>
+         <input type="text" name="id" id="id" value="{{ old('id', $ugyfel->UgyfelID) }}">
+     </fieldset>
+
+
     <fieldset>
         <label for="nev">Név</label>
         <input type="text" name="nev" id="nev" value="{{ old('nev', $ugyfel->Nev) }}">
+    </fieldset>
+
+    <fieldset>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{ old('email', $ugyfel->Email) }}">
     </fieldset>
 
     <fieldset>

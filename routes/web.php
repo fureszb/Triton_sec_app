@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UgyfelController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\SignaturePadController;
+use App\Http\Controllers\PDFController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +28,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/send-mail',[TestController::class,'sendMailWithPdf']);
+    Route::get('send-email-pdf', [PDFController::class, 'index']);
+
+
+    Route::get('/signaturepad', [SignaturePadController::class, 'index']);
+    Route::post('/signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
+
+
+    Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -36,6 +51,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/ugyfel', [UgyfelController::class, 'index'])->name('ugyfel.index');
     Route::get('/ugyfel/{id}', [UgyfelController::class, 'show'])->name('ugyfel.show');
+
+    Route::get('/ugyfel/search', 'UgyfelController@search')->name('ugyfel.search');
+
+
 });
 
 require __DIR__ . '/auth.php';
+
