@@ -7,6 +7,7 @@ use App\Models\User;
 use PDF;
 use App\Models\Ugyfel;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PDFController extends Controller
 {
@@ -18,15 +19,20 @@ class PDFController extends Controller
     public function generatePDF()
     {
         $users = User::get();
-        $files = File::files(public_path('upload'));
 
         $data = [
             'title' => 'Welcome to ItSolutionStuff.com',
             'date' => date('m/d/Y'),
-            'users' => $users
+            'users' => $users,
         ];
-        $pdf = PDF::loadView('myPDF', $data);
-        $pdf->save(public_path('files/' . 'elso.pdf'));
 
+        $pdf = PDF::loadView('myPDF', $data);
+
+        // Mentsd el a PDF fájlt a storage könyvtárba
+        $pdfPath = 'public/files/elso.pdf';
+        Storage::put($pdfPath, $pdf->output());
+
+        // Visszaadhatod a PDF fájl elérési útvonalát
+        return Storage::url($pdfPath);
     }
 }

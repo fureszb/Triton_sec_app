@@ -24,16 +24,19 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('ugyfel.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+/*Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
+
 
 Route::middleware('auth')->group(function () {
 
     Route::get('/send-mail',[TestController::class,'sendMailWithPdf']);
-    Route::get('send-email-pdf', [PDFController::class, 'index']);
 
-
-    Route::get('/signaturepad', [SignaturePadController::class, 'index']);
+    Route::get('/signaturepad', [SignaturePadController::class, 'index'])->name('signaturepad');
     Route::post('/signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
 
 
@@ -56,6 +59,7 @@ Route::middleware('auth')->group(function () {
 
 
 });
+Route::get('/elso-kep', 'App\Http\Controllers\HomeController@elsoKep');
 
 require __DIR__ . '/auth.php';
 

@@ -46,7 +46,9 @@ class UgyfelController extends Controller
         $szolgaltatasok = Szolgaltatas::all();
         $munkak = Munka::all();
 
-        return view('ugyfel.create', compact('szerelok', 'szolgaltatasok', 'munkak'));
+        $ugyfel = new Ugyfel(); // Inicializálás
+
+        return view('ugyfel.create', compact('szerelok', 'szolgaltatasok', 'munkak', 'ugyfel')); // Átadás a nézetnek
     }
 
     /**
@@ -61,7 +63,7 @@ class UgyfelController extends Controller
             'objcim' => ['required', 'min:3'],
             'telefon' => ['required', 'regex:/^(\+36|06)?[0-9]{9}$/'],
             'szamnev' => ['required', 'regex:/^[A-Za-záéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]{3,}$/'],
-            'szamcim' => ['required', 'regex:/^[^\s][A-Za-z0-9\s\-\/\.,]+[^\s]$/', 'min:3'],
+            'szamcim' => ['required', 'min:3'],
             'kezd_datum' => 'required',
             'bef_datum' => 'required',
             'adoszam' => ['nullable', 'between:8,11'],
@@ -117,7 +119,7 @@ class UgyfelController extends Controller
 
         $ugyfel->save();
 
-        return redirect()->route('ugyfel.index')->with('success', 'Ügyfél sikeresen létrehozva');
+        return redirect()->route('signaturepad')->with('success', 'Ügyfél sikeresen létrehozva, aláírás kötelező!');
     }
 
     /**

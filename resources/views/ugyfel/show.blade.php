@@ -3,7 +3,6 @@
 @section('content')
 
 <h1>{{ $ugyfel->Nev }} Ügyfél részletek</h1>
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">

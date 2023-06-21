@@ -5,35 +5,27 @@
 }
 
 :root {
-    --dark: #260a33;
+    --dark: #ffff;
     --medium: #631a86;
-    --medium-light: #9927ce;
-    --light: #ffe9ce;
+    --medium-light: rgb(55 65 81 / 1);
+    --light: #f3f4f6;
     --danger: #ffe156;
     --danger-dark: #ff9f1c;
 }
 
 body {
-    background-color: #99afff;
-    background-image: radial-gradient(
-            at 49% 43%,
-            hsla(169, 65%, 62%, 1) 0px,
-            transparent 50%
-        ),
-        radial-gradient(at 10% 73%, hsla(309, 84%, 60%, 1) 0px, transparent 50%),
-        radial-gradient(at 56% 66%, hsla(138, 97%, 78%, 1) 0px, transparent 50%),
-        radial-gradient(at 65% 6%, hsla(207, 67%, 61%, 1) 0px, transparent 50%),
-        radial-gradient(at 88% 77%, hsla(316, 87%, 77%, 1) 0px, transparent 50%),
-        radial-gradient(at 3% 25%, hsla(175, 84%, 76%, 1) 0px, transparent 50%),
-        radial-gradient(at 40% 37%, hsla(3, 75%, 69%, 1) 0px, transparent 50%);
+    background-color: #f3f4f6;
+
     min-height: 100dvh;
     line-height: 1.2em;
     font-size: 120%;
+    font-weight: 500;
+    font-family: Figtree, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 body,
 input {
-    font-family: "Quicksand", sans-serif;
+    font-family: Figtree, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 header,
@@ -48,23 +40,27 @@ header,
 footer {
     min-height: 10vh;
 }
+
 main {
     min-height: 80vh;
-    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.5);
+    box-shadow: 0em 1em 2em 0px rgba(0, 0, 0, 0.5);
 }
 
 main {
     background: var(--dark);
-    color: #fff;
+    color: #000000d1;
     border-radius: 0.5em;
 }
 
 h1 {
     margin: 1em 0;
+    font-size: 38px;
 }
+
 ul {
     list-style: none;
 }
+
 a {
     text-decoration: none;
 }
@@ -76,6 +72,7 @@ fieldset {
     grid-template-columns: 1fr 3fr 2fr;
     margin-bottom: 0.5em;
 }
+
 input,
 button,
 select,
@@ -84,23 +81,33 @@ select,
     padding: 0.25em;
     border: none;
     border-radius: 0.5em;
-    color: var(--dark);
+    color: black;
 }
+
 button,
 .button {
-    padding: 0.5em 2em;
+    padding: 0.5em 1em;
     font-weight: bold;
-    background-color: var(--medium);
+    background-color: #1f2937;
     color: #fff;
     transition: background-color 350ms ease-in-out;
+    cursor: pointer;
+
+    font-size: 14px;
+}
+.torol{
+    background-color: #c9302c;
+    margin-top: 6px;
 }
 button:hover,
 .button:hover {
     background-color: var(--medium-light);
 }
+
 label {
     margin: 0 1em 0 0;
 }
+
 textarea {
     height: 5rem;
 }
@@ -109,27 +116,47 @@ textarea {
 header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding-bottom: 20px;
+    padding-top: 15px;
 }
+
 header img {
-    height: 5vh;
-    padding: 0.25em;
-    background-color: #fff;
-    border-radius: 50%;
+    width: 100px;
 }
+footer{
+    text-align: center;
+    margin: 10px;
+    color: black;
+}
+
+form input, select{
+    border: 1.5px solid black;
+    padding: 3px;
+    font-size: 17px;
+}
+input{
+    --tw-border-opacity: 1;
+    border-color: rgb(99 102 241 / var(--tw-border-opacity));
+}
+
 header ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 header li {
     margin: 0 0 0 1em;
 }
-header a {
-    color: #fff;
-    font-weight: bold;
+
+header a:hover{
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
+header a:focus{
+    outline-color: #ef4444;
+}
 /* main */
 main a {
     color: var(--light);
@@ -147,10 +174,12 @@ footer {
     gap: 1em;
     margin: 0.5em 0;
 }
+
 .danger {
     background-color: var(--danger);
     color: var(--dark);
 }
+
 .danger:hover {
     background-color: var(--danger-dark);
 }
@@ -163,11 +192,14 @@ footer {
     padding: 1em;
     border-radius: 0.5em;
     margin: 1em 0;
+    color: #000;
 }
+
 .alert-warning::before {
     content: "⚠️";
     margin-right: 0.5em;
 }
+
 .alert-success::before {
     content: "✅";
     margin-right: 0.5em;
@@ -178,6 +210,10 @@ footer {
     display: flex;
     gap: 1em;
     margin: 0.5em;
+}
+
+nav form{
+
 }
 .tags li {
     background-color: var(--light);
@@ -191,6 +227,7 @@ footer {
     width: fit-content;
     text-align: center;
 }
+
 #paginator svg {
     width: 1em;
     height: 1em;
@@ -206,4 +243,58 @@ footer {
 
 canvas {
     touch-action: none;
+}
+
+main ul {
+    display: grid;
+    grid-template-columns: repeat(4, 20%);
+    gap: 10px;
+}
+
+.fa-sharp {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.fa-regular {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.sort img {
+    width: 80%;
+    background-color: white;
+    border-radius: 15px;
+    border: 3px solid black;
+}
+
+.title {
+    display: grid;
+    grid-template-columns: 15% 50px 50px 1fr;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+    justify-items: end;
+}
+nav a{
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+main li{
+    font-size: 20px;
+}
+
+.kereses{
+    display: flex;
+    margin: 5px;
+    gap: 8px;
+}
+nav button {
+    background-color: #c9302c;
 }

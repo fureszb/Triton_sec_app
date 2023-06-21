@@ -7,13 +7,20 @@
     <title>Triton Security</title>
     <link rel="stylesheet" href="{{asset('style.css')}}">
     <link rel="shortcut icon" href="{{asset('logo.png')}}" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
-    <img src="{{asset('logo.png')}}" alt="">
+
+
+
+
+    <div class="logo">
+        <img src="{{ asset('logo.png') }}" width="130px" alt="LOGO">
+    </div>
     <nav>
-        <ul><li><a href="{{route('ugyfel.index')}}">Adatok</a></li>
-       <li><a href="{{route('ugyfel.create')}}">Új adat</a></li>
+        <ul><li><a href="{{route('ugyfel.index')}}">Ügyfelek</a></li>
+       <li><a href="{{route('ugyfel.create')}}">Új ügyfél</a></li>
         @if(auth()->check())
             <li>
             <form action="{{route('logout')}}" method="post">

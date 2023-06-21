@@ -1,11 +1,19 @@
 @extends('layout')
 
 @section('content')
-
-    <h1>Ügyfelek
-        <a href="{{ route('ugyfel.index', ['sort_by' => 'UgyfelID', 'sort_dir' => 'asc']) }}" title="Növekvő sorrend">^</a>
-        <a href="{{ route('ugyfel.index', ['sort_by' => 'UgyfelID', 'sort_dir' => 'desc']) }}" title="Csökkenő sorrend">ˇ</a>
-        <form action="{{ route('ugyfel.index') }}" method="GET">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <h1 class="title">Ügyfelek
+        <a href="{{ route('ugyfel.index', ['sort_by' => 'UgyfelID', 'sort_dir' => 'asc']) }}" title="Növekvő sorrend">
+            <div class="sort">
+                <img  style="transform: rotate(180deg);" src="{{ asset('sort.png') }}" alt="">
+            </div>
+        </a>
+        <a href="{{ route('ugyfel.index', ['sort_by' => 'UgyfelID', 'sort_dir' => 'desc']) }}" title="Csökkenő sorrend">
+            <div class="sort">
+                <img src="{{ asset('sort.png') }}" alt="">
+            </div>
+        </a>
+        <form class="kereses" action="{{ route('ugyfel.index') }}" method="GET">
             <input type="text" name="search" placeholder="Keresés név vagy azonosító alapján">
             <button type="submit">Keresés</button>
         </form>
@@ -22,16 +30,14 @@
             <form action="{{ route('ugyfel.destroy', $u->UgyfelID) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" onclick="return confirm('Biztos törölni kívánja az ügyfélt?')">Törlés</button>
+                <button class="torol" type="submit" onclick="return confirm('Biztos törölni kívánja az ügyfélt?')">Törlés</button>
             </form>
         @endforeach
-
-
     </ul>
 
     <div id="paginator">
-        {{ $ugyfel->appends(['sort_by' => request('sort_by'), 'sort_dir'=> request('sort_dir')])->links() }}
+        {{ $ugyfel->appends(['sort_by' => request('sort_by'), 'sort_dir' => request('sort_dir')])->links('custom_pagination') }}
     </div>
+
+
 @endsection
-
-

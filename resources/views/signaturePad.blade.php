@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Laravel Signature Pad Tutorial Example - ItSolutionStuff.com </title>
+    <title>Laravel Signature Pad Tutorial Example - ItSolutionStuff.com</title>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
 
@@ -33,17 +33,10 @@
                 <div class="card">
                     <div class="card-body">
 
-                        @if ($message = Session::get('success'))
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <strong>{{ $message }}</strong>
-                            </div>
-                            <script>
-                                setTimeout(function() {
-                                    window.location.href = '{{ route('ugyfel.index') }}';
-                                }, 1000);
-                            </script>
-                        @endif
+                        <div id="alertDiv" class="alert alert-danger alert-dismissible" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ 'Adatok feldolgozás alatt. Maradj ezen az oldalon!' }}</strong>
+                        </div>
 
                         <form method="POST" action="{{ route('signaturepad.upload') }}">
                             @csrf
@@ -56,13 +49,25 @@
                                 <textarea id="signature64" name="signed" style="display: none"></textarea>
                             </div>
                             <br />
-                            <button class="btn btn-success">Mentés</button>
+                            <button id="saveButton" class="btn btn-success">Mentés</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var saveButton = document.getElementById('saveButton');
+            var alertDiv = document.getElementById('alertDiv');
+
+            saveButton.addEventListener('click', function() {
+                alertDiv.style.display = 'block';
+            });
+        });
+    </script>
+
     <script type="text/javascript">
         var sig = $('#sig').signature({
             syncField: '#signature64',
