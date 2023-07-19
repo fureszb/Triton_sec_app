@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Ugyfel;
 use PDF;
 use Mail;
+use Illuminate\Support\Facades\Response;
 
 class TestController extends Controller
 {
@@ -14,28 +15,33 @@ class TestController extends Controller
         $ugyfel = Ugyfel::latest()->first();
 
         $data["email"] = "frsz.bence@gmail.com";
-        $data["title"] = "Ügyfél részletek";
+        $data["title"] = "Szerződéskötés";
         $data["ugyfel"] = $ugyfel;
 
-        $pdf = PDF::loadView('mail', $data);
+        $pdf = PDF::loadView('mail', $data)->setOptions(['defaultFont' => 'sans-serif', 'encoding' => 'UTF-8']);
 
+
+
+        // E-mail küldése
         Mail::send('mail', $data, function ($message) use ($data, $pdf) {
             $message->to($data["email"])
-                    ->subject($data["title"])
-                    ->attachData($pdf->output(), "ugyfel_reszletek.pdf");
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "Triton-Security.pdf");
         });
 
-          // Képek törlése a public/images mappából
-         $folderPath = public_path('images');
+        $pdfFilePath = storage_path('app/public/Triton-Security.pdf');
+        $pdf->save($pdfFilePath);
 
-          // Fájlok listázása a mappában
-          $files = File::files($folderPath);
+           // Képek törlése a public/images mappából
+           /*$folderPath = public_path('kepek');
+           $files = File::files($folderPath);
+           foreach ($files as $file) {
+               File::delete($file);
+           }*/
 
-          // Fájlok törlése
-          foreach ($files as $file) {
-              File::delete($file);
-          }
+        // Letöltés a böngészőbe
+        $pdf->download('Triton-Security.pdf');
+
         return redirect('/ugyfel')->with('success', 'Az aláírás és az ügyfél sikeresen mentve lett és az email elküldve!');
-
     }
 }

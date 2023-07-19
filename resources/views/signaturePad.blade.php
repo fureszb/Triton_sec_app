@@ -1,84 +1,38 @@
-<html>
-
+<!doctype html>
+<html lang="hu">
 <head>
-    <title>Laravel Signature Pad Tutorial Example - ItSolutionStuff.com</title>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
+  <meta charset="utf-8">
+  <title>Triton Security</title>
+  <link rel="shortcut icon" href="{{asset('logo.png')}}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
-        rel="stylesheet">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
-    <style>
-        .kbw-signature {
-            width: 100%;
-            height: 200px;
-        }
-
-        #sig canvas {
-            width: 100% !important;
-            height: auto;
-        }
-    </style>
-
+  <link rel="stylesheet" href="css/signature-pad.css">
 </head>
+<body onselectstart="return false">
 
-<body class="bg-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <div class="card">
-                    <div class="card-body">
-
-                        <div id="alertDiv" class="alert alert-danger alert-dismissible" style="display: none">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ 'Adatok feldolgozás alatt. Maradj ezen az oldalon!' }}</strong>
-                        </div>
-
-                        <form method="POST" action="{{ route('signaturepad.upload') }}">
-                            @csrf
-                            <div class="col-md-12">
-                                <label class="" for="">Aláírás:</label>
-                                <br />
-                                <div id="sig"></div>
-                                <br />
-                                <button id="clear" class="btn btn-danger btn-sm">Törlés</button>
-                                <textarea id="signature64" name="signed" style="display: none"></textarea>
-                            </div>
-                            <br />
-                            <button id="saveButton" class="btn btn-success">Mentés</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div id="signature-pad" class="signature-pad">
+    <div class="signature-pad--body">
+      <canvas></canvas>
     </div>
+    <div class="signature-pad--footer">
+      <div class="signature-pad--actions">
+        <div class="column">
+          <button type="button" class="button clear" data-action="clear">Törlés</button>
+          <button type="button" class="button undo" data-action="undo">Visszavonás</button>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var saveButton = document.getElementById('saveButton');
-            var alertDiv = document.getElementById('alertDiv');
+        </div>
+        <div class="column">
+          <button type="button" class="button save" data-action="save-png">Mentés</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            saveButton.addEventListener('click', function() {
-                alertDiv.style.display = 'block';
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        var sig = $('#sig').signature({
-            syncField: '#signature64',
-            syncFormat: 'PNG'
-        });
-        $('#clear').click(function(e) {
-            e.preventDefault();
-            sig.signature('clear');
-            $("#signature64").val('');
-        });
-    </script>
+  <script src="js/signature_pad.umd.js"></script>
+  <script src="js/app.js"></script>
 </body>
-
 </html>

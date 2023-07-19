@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/86a7bd8db7.js" crossorigin="anonymous"></script>
     <h1 class="title">Ügyfelek
         <a href="{{ route('ugyfel.index', ['sort_by' => 'UgyfelID', 'sort_dir' => 'asc']) }}" title="Növekvő sorrend">
             <div class="sort">

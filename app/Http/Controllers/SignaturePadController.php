@@ -3,39 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class SignaturePadController extends Controller
 {
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
+
     public function index()
     {
         return view('signaturePad');
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
     public function upload(Request $request)
     {
-        $folderPath = public_path('images/');
-
-        $image_parts = explode(";base64,", $request->signed);
-
-        $image_type_aux = explode("image/", $image_parts[0]);
-
-        $image_type = $image_type_aux[1];
-
-        $image_base64 = base64_decode($image_parts[1]);
-
-        $file = $folderPath . 'alairas.png';
-
-        file_put_contents($file, $image_base64);
         return redirect('/send-mail')->with('success', 'Az aláírás és az ügyfél sikeresen mentve lett!');
+    }
+
+    public function saveImage(Request $request)
+    {
+        $imageData = $request->input('dataURL');
+        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $imageData = base64_decode($imageData);
+
+        $folderPath = public_path('kepek');
+        $fileName = 'alairas.png';
+
+        file_put_contents($folderPath . '/' . $fileName, $imageData);
+        return response()->json(['success' => true]);
+        //return redirect('/send-mail')->with('success', 'Az aláírás és az ügyfél sikeresen mentve lett!');
     }
 }

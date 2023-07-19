@@ -34,7 +34,12 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/send-mail',[TestController::class,'sendMailWithPdf']);
+    Route::get('/send-mail', [TestController::class, 'sendMailWithPdf']);
+
+    // routes/web.php
+
+    Route::post('/save-image', [SignaturePadController::class, 'saveImage']);
+
 
     Route::get('/signaturepad', [SignaturePadController::class, 'index'])->name('signaturepad');
     Route::post('/signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
@@ -56,10 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ugyfel/{id}', [UgyfelController::class, 'show'])->name('ugyfel.show');
 
     Route::get('/ugyfel/search', 'UgyfelController@search')->name('ugyfel.search');
-
-
 });
 Route::get('/elso-kep', 'App\Http\Controllers\HomeController@elsoKep');
 
 require __DIR__ . '/auth.php';
-

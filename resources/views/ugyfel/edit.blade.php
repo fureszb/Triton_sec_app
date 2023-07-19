@@ -3,7 +3,55 @@
 @section('content')
 
 @error('nev')
-    <div class="alert alert-warning">{{ $message }}</div>
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('email')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('objcim')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('telefon')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('szamnev')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('szamcim')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('kezd_datum')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('bef_datum')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('adoszam')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('szerelo')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('szolgaltatas')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('munka')
+<div class="alert alert-warning">{{ $message }}</div>
+@enderror
+
+@error('felhasznalt_anyagok')
+<div class="alert alert-warning">{{ $message }}</div>
 @enderror
 
 <form action="{{ route('ugyfel.update', $ugyfel->UgyfelID) }}" method="POST">

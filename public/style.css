@@ -214,8 +214,6 @@ footer {
     margin: 0.5em;
 }
 
-nav form {
-}
 
 .tags li {
     background-color: var(--light);
@@ -324,6 +322,16 @@ nav button {
 .pagination {
     display: flex;
     justify-content: center;
+}
+
+.list-group{
+    display: grid;
+    grid-template-columns: 1fr;
+
+}
+.container h3{
+    margin-bottom: 15px;
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 650px) {

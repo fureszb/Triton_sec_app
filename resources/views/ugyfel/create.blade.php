@@ -50,6 +50,10 @@
         <div class="alert alert-warning">{{ $message }}</div>
     @enderror
 
+    @error('felhasznalt_anyagok')
+        <div class="alert alert-warning">{{ $message }}</div>
+    @enderror
+
     <form id="createForm" action="{{ route('ugyfel.store') }}" method="POST">
         @csrf
         <fieldset>
