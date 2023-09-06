@@ -1,6 +1,3 @@
-<!-- Először győződj meg róla, hogy a jQuery linkelve van a projektbe. -->
-<!-- Példa: -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
 <style>
     .page-item> a {
@@ -69,17 +66,3 @@
     </ul>
 @endif
 
-<!-- JavasScript kód a kattinthatóság figyeléséhez -->
-<script>
-    // Miután a dokumentum betöltődött
-    $(document).ready(function() {
-        // Kiválasztjuk az összes .page-item elemet
-        $('.page-item').each(function() {
-            // Ha az elem .disabled osztállyal rendelkezik, akkor inaktív
-            if ($(this).hasClass('disabled')) {
-                $(this).find('a.page-link').removeAttr('href'); // Elnyomjuk a href attribútumot, így nem lehet rá kattintani
-                $(this).find('span.page-link > i').css('color', '#9E9E9E'); // Beállítjuk a színt az inaktív elemre
-            }
-        });
-    });
-</script>

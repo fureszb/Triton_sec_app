@@ -25,7 +25,7 @@ class UgyfelController extends Controller
             $query->search($keyword);
         }
 
-        $ugyfel = $query->paginate(10);
+        $ugyfel = $query->paginate(9);
 
         return view('ugyfel.index', compact('ugyfel'));
     }

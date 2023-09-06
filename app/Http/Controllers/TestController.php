@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Models\Ugyfel;
@@ -32,8 +33,8 @@ class TestController extends Controller
         $pdfFilePath = storage_path('app/public/Triton-Security.pdf');
         $pdf->save($pdfFilePath);
 
-           // Képek törlése a public/images mappából
-           /*$folderPath = public_path('kepek');
+        // Képek törlése a public/images mappából
+        /*$folderPath = public_path('kepek');
            $files = File::files($folderPath);
            foreach ($files as $file) {
                File::delete($file);
@@ -42,6 +43,15 @@ class TestController extends Controller
         // Letöltés a böngészőbe
         $pdf->download('Triton-Security.pdf');
 
-        return redirect('/ugyfel')->with('success', 'Az aláírás és az ügyfél sikeresen mentve lett és az email elküldve!');
+        $message = 'Az aláírás és az ügyfél sikeresen mentve lett és az email elküldve!';
+
+
+        /*return Response::make($pdf->output(), 'application/pdf')
+        ->setStatusCode(200)
+        ->setStatus('OK')
+        ->send();*/
+        //return redirect('/ugyfel')->with('success', 'Az aláírás és az ügyfél sikeresen mentve lett és az email elküldve!');
+        return redirect()->route('ugyfel.index')->with('success', $message);
+
     }
 }
